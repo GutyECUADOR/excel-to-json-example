@@ -30,4 +30,27 @@ $( document ).ready(function() {
         
     });
 
+    $('#txtfile').change(function(e){
+        console.log('Leyendo texto');
+
+        if (this.value) { //Comprobar que existen archivo seleccionado
+            const reader = new FileReader();
+            let archivo = this.files[0];
+            reader.readAsText(archivo);
+            reader.onload = function(e) {
+                console.log(reader.result);
+
+                let items = reader.result.split('\n').map(function (line) {
+                   return line.split('\t');
+                })
+                console.log(items);
+
+                items.forEach(function(element) {
+                    console.log(element[0]);
+                });
+            }
+        }
+        
+    });
+
 });
